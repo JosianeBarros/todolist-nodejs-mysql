@@ -1,0 +1,124 @@
+<div id="primeiroQuadrado">
+
+<h2>TO-DO LIST</h2>
+
+<form action="/tarefas" method="POST">
+
+ <label>Adicione uma tarefa para fazer:</label><br>
+ <input type="text" name="tarefas">
+ 
+ <input type="submit" value="Adicionar">
+
+</form>
+
+{{#each listas}}
+
+<div id="segundoQuadrado">
+ <div id="{{id}}"></div>
+
+ <label for="{{id}}">{{tarefas}}</label>
+
+ <button onclick="editar({{id}})">Editar</button>
+
+ <a href="/apagar/{{id}}"><button>Deletar</button></a>
+ <hr>
+
+</div>
+{{/each}}
+
+<style>
+
+    body{
+        background-color: black;
+    }
+    *{
+        font-family: "Times New Roman", Times, serif;
+    }
+
+    h2{
+        font-size: 2.5em;
+    }
+
+    #primeiroQuadrado{
+        display: grid;
+        height: 100%;
+        align-items: center;
+        justify-items: center;
+        color: white;
+        }
+
+    form{
+        display: grid;
+        background-color: rgb(79,79,79);
+        justify-items: center;
+        border-radius: 5px;
+        padding: 2%;
+        margin-bottom: 25px;
+        width: 73%;
+    }
+
+    label{
+        display: block;
+        font-size: 1.2em;
+    }
+
+    input[type=text]{
+        width: 70%;
+        border-radius: 5px;
+        padding: 1.5%;
+        margin-bottom: 20px;
+    }
+
+    input[type=submit]{
+        padding: 1%;
+        width: 20%;
+        border-radius: 5px;
+        font-size: medium;
+    }
+    #segundoQuadrado{
+        margin-top: 10px;
+        width: 75%;
+        padding: 1%;
+        margin-bottom: 14px;
+        border-radius: 5px;
+        background-color: grey;
+    }
+
+    button{
+        background-color: rgb(244, 244, 247);
+        color: black;
+        padding: 0.3em;
+        width: 4em;
+        font-size: 0.9em;
+        border-style: inset;
+        margin-top: 0.9em;
+    }
+
+</style>
+<script>
+
+    function editar(id){
+        
+        const url =  "/editar/" + id;
+
+        const elementForm = document.createElement("form");
+        elementForm.setAttribute("action", url);
+        elementForm.setAttribute("method", "POST");
+
+        const elementInput = document.createElement("input");
+        elementInput.setAttribute("type", "text");
+        elementInput.setAttribute("name", "atualizar");
+
+        elementForm.appendChild(elementInput);
+
+        const elementSubmit = document.createElement("input");
+        elementSubmit.setAttribute("type", "submit");
+        elementSubmit.setAttribute("value", "OK");
+        elementForm.appendChild(elementSubmit);
+
+        document.getElementById(id).appendChild(elementForm);
+        }
+
+</script>
+
+</div>
